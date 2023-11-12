@@ -1,0 +1,28 @@
+{
+  "name": "com.tomduchene.unity-git-locks",
+  "displayName": "Git Locks",
+  "version": "1.2.9",
+  "description": "An editor tool to manipulate git LFS locks",
+  "keywords": [
+    "unity",
+    "unity3d",
+    "utility"
+  ],
+  "homepage": "https://github.com/TomDuchene/unity-git-locks",
+  "bugs": {
+    "url": "https://github.com/TomDuchene/unity-git-locks/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/TomDuchene/unity-git-locks.git"
+  },
+  "license": "MIT",
+  "author": "Tom Duchene (http://tomduchene.fr/)",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "Editor tool",
+  "dependencies": {
+    "com.unity.nuget.newtonsoft-json": "2.0.0"
+  }
+}
