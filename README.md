@@ -62,8 +62,23 @@ The project's primary objective is to build an interactive, procedural generatio
   - Project wrap-up and submission.
   - (If time permits) Development of skybox with time-of-day changes and custom shaders.
   - (If time permits) Creation of export functionalities for artwork or game assets.
-
+ 
 ## 6. Work division
 - Shixuan Fang: procedural skybox and terrain
 - Tongwei Dai: Particle system(like stars, birds, etc.), Interactive scene
 - Gehan Zheng: Terrain shaders, post-process shaders, tone mapping, and other potential shaders
+
+## Milestone1
+### Works Done:
+- **Tongwei Dai**
+  - Add gridification shader for the ground plane
+  - Car exhaust particle effect
+- **Gehan Zheng**
+  - Add screen space post process render feature for tone mapping
+  - Add toon-based post process materials for car
+- **Shixuan Fang**
+  - Finished URP setup
+  - Added custom post process features and passes
+  - Sun shader in progress
+### Current Result
+- <img width="1280" alt="5ae1f9451e39f5789adea058fa98cb3" src="https://github.com/dw218192/UnityURP_Synthwave_Sytalization/assets/31294154/fa5083c5-099b-481a-9d71-e6421a1b552b">
