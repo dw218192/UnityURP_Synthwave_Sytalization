@@ -21,7 +21,7 @@ public class PostProcessSunFeature : ScriptableRendererFeature
         sunMaterial = CoreUtils.CreateEngineMaterial(sunShader);
         blendMaterial = CoreUtils.CreateEngineMaterial(blendShader);
         m_customPass = new PostProcessSunPass(sunMaterial);
-        m_blendPass = new PostProcessBlendPass();
+        m_blendPass = new PostProcessBlendPass(blendMaterial);
     }
 
     public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
@@ -46,7 +46,7 @@ public class PostProcessSunFeature : ScriptableRendererFeature
     protected override void Dispose(bool disposing)
     {
         CoreUtils.Destroy(sunMaterial);
-        CoreUtils.Destroy(compositeMaterial);
+        CoreUtils.Destroy(blendMaterial);
     }
 }
 

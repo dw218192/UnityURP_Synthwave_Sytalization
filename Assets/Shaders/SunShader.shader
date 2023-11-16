@@ -18,8 +18,8 @@ Shader "Custom/SunShader"
 
             HLSLPROGRAM
 
-            #pragma vertex Outline_Vert;
-            #pragma fragment Outlint_Frag;
+            #pragma vertex Sun_Vert;
+            #pragma fragment Sun_Frag;
 
             #include "Assets/Shaders/Includes/SunHLSL.hlsl"
             ENDHLSL
