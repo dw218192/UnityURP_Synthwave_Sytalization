@@ -4,8 +4,8 @@ void shade_float(float2 uv, float2 sz, float bloom, float3 dark, float3 bright, 
     lines += smoothstep(sz, float2(0,0), uv) * 0.4 * bloom;
     col = lerp(dark, bright, clamp(lines.x + lines.y, 0.0, 3.0));
 }
-void get_brightness_float(float3 pos, float x_max, float3 dark, float3 bright, out float3 col) {
-    float t = abs(pos.x) / x_max;
+void get_brightness_float(float3 pos, float3 extents, float3 dark, float3 bright, out float3 col) {
+    float t = abs(pos.x) / extents.x;
     col = lerp(dark, bright, sqrt(t));
 }
 
@@ -58,13 +58,14 @@ inline float hash(float2 vf) {
     uint2 vi = uint2(abs(vf));
     return float(hash(vi.x + (vi.y<<16) + offset)) / float( 0xffffffffU );
 }
-void vertex_height_float(float3 pos, float noise_freq, float hi, float speed, float xthres, float xmax, out float3 outpos) {
+void vertex_height_float(float3 pos, float noise_freq, float hi, float speed, float xthres, float3 extents, out float3 outpos) {
     float2 sp = float2(pos.x, pos.z - speed * _Time.x);
     float offset = 0.0;
     if (abs(pos.x) >= xthres) {
         // smooth step between 0 and hi
-        float t = (abs(pos.x) - xthres) / (xmax - xthres); // [0,1]
-        pos.y += hi * smoothstep(0, 1, t) + noise(sp * noise_freq, 2.2);
+        float t = (abs(pos.x) - xthres) / (extents.x - xthres); // [0,1]
+        float farness = 1.0 - (pos.z + extents.z) / (2 * extents.z); // [0,1]
+        pos.y += hi * smoothstep(0, 1, t) + noise(sp * noise_freq, 2.2 * (farness * farness));
     } else {
         pos.y += noise(sp * noise_freq) * 0.1;
     }

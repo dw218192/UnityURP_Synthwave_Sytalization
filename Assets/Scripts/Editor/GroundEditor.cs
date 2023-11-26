@@ -14,7 +14,7 @@ public class GroundEditor : Editor
             var ground = target as Ground;
             var rend = ground.GetComponent<Renderer>();
             var groundMat = rend.sharedMaterial;
-            groundMat.SetFloat("_x_max", rend.localBounds.max.x);
+            groundMat.SetVector("_extent", rend.localBounds.extents);
         }
     }
 }
