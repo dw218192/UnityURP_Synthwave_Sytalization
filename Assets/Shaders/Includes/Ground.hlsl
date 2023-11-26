@@ -1,8 +1,12 @@
-void shade_float(float2 uv, float2 sz,  float bloom, float3 dark, float3 bright, out float3 col) {
+void shade_float(float2 uv, float2 sz, float bloom, float3 dark, float3 bright, out float3 col) {
     uv = abs(frac(uv) - 0.5);
     float2 lines = smoothstep(sz, float2(0,0), uv);
     lines += smoothstep(sz, float2(0,0), uv) * 0.4 * bloom;
     col = lerp(dark, bright, clamp(lines.x + lines.y, 0.0, 3.0));
+}
+void get_brightness_float(float3 pos, float x_max, float3 dark, float3 bright, out float3 col) {
+    float t = abs(pos.x) / x_max;
+    col = lerp(dark, bright, sqrt(t));
 }
 
 inline float rd (float2 uv) {
@@ -25,7 +29,7 @@ inline float noise (float2 uv) {
     float t = lerp(lerp(r0, r1, f.x), lerp(r2, r3, f.x), f.y);
     return t;
 }
-float noise(float2 uv, float scale) {
+inline float noise(float2 uv, float scale) {
     float t = 0.0;
     float freq = pow(2.0, float(0));
     float amp = pow(0.5, float(3));
@@ -41,7 +45,7 @@ float noise(float2 uv, float scale) {
     return t;
 }
 // From https://www.shadertoy.com/view/WttXWX
-uint hash(uint x) {
+inline uint hash(uint x) {
     x ^= x >> 16;
     x *= 0x7feb352dU;
     x ^= x >> 15;
@@ -49,21 +53,20 @@ uint hash(uint x) {
     x ^= x >> 16;
     return x;
 }
-float hash(float2 vf) {
+inline float hash(float2 vf) {
     uint offset = vf.x < 0.0 ? 13u : 0u;
     uint2 vi = uint2(abs(vf));
     return float(hash(vi.x + (vi.y<<16) + offset)) / float( 0xffffffffU );
 }
-void vertex_height_float(float3 pos, float hi, float speed, float xthres, float xmax, out float3 outpos) {
+void vertex_height_float(float3 pos, float noise_freq, float hi, float speed, float xthres, float xmax, out float3 outpos) {
     float2 sp = float2(pos.x, pos.z - speed * _Time.x);
     float offset = 0.0;
     if (abs(pos.x) >= xthres) {
         // smooth step between 0 and hi
         float t = (abs(pos.x) - xthres) / (xmax - xthres); // [0,1]
-        t *= hi; // [0,hi]
-        pos.y += smoothstep(0, hi, t) + noise(sp * 2.0, 2.2);
+        pos.y += hi * smoothstep(0, 1, t) + noise(sp * noise_freq, 2.2);
     } else {
-        pos.y += noise(sp * 2.0) * 0.1;
+        pos.y += noise(sp * noise_freq) * 0.1;
     }
     
     outpos = pos;

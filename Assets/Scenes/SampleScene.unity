@@ -610,11 +610,12 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     - _bloom: 0.67
-    - _max_height: 10
-    - _speed: 5
+    - _max_height: 1.97
+    - _noise_freq: 6
+    - _speed: 8.8
     - _uv_multiplier: 50
     - _x_max: 5
-    - _x_thres: 2
+    - _x_thres: 1.87
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
