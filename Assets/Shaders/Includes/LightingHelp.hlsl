@@ -361,7 +361,7 @@ void sun_float(in float2 fragCoord, in float iTime, float splitPoint, float blen
     float lineHeight = 0.1; // Basic line thickness    [0., inf.] (> 0.5 looks ugly)
     float thicknessMod = 0.5; // Speed of line will get thin    [0., inf.]
 
-    float scale = 100.0;
+    float scale = 40.0;
     float2 uv = float2(fragCoord.x*scale-scale*0.5+0.5, fragCoord.y*scale*0.5); // UV of pixel (pixels
     // ======== DEFAULT INITS ========
     float2 sSize = float2(1, 1); // Screen size (pixels)
@@ -410,11 +410,24 @@ void sun_float(in float2 fragCoord, in float iTime, float splitPoint, float blen
         float bottomBorder = topBorder - lineHeight * pow(lineLenght - lineOsc, thicknessMod); // Setting bottom border and making it moving FASTER than top, so the line will be thinner at top
 
 
-        if (bottomBorder < rPos.y && rPos.y < topBorder) { // If y is between bottom and top borders, we paint this to bg color.
+        if (bottomBorder < rPos.y && rPos.y < topBorder || distToCenter > circleR) { // If y is between bottom and top borders, we paint this to bg color.
             col = float4(0.,0.,0.,0.);
         }
     }
+    if (distToCenter > circleR && isCircled) {
+        float3 colorAbove = lerp(bottomColor1, topColor1, rPos.y);
+        float3 colorBelow = lerp(bottomColor2, topColor2, rPos.y);
 
+        if (rPos.y < splitPoint - blendRange) {
+            col = float4(colorBelow, 1.0);
+        } else if (rPos.y > splitPoint + blendRange) {
+            col = float4(colorAbove, 1.0);
+        } else {
+            float3 blendedColor = lerp(colorBelow, colorAbove, blendFactor);
+            col = float4(blendedColor, 1.0);
+        }
+        
+    }
 
     // ======== OUTPUT ========
     fragColor = col; // Output color
