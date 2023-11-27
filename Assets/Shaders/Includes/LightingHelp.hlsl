@@ -343,7 +343,8 @@ float mod2(float a, float b) {
     return a - (b * floor(a / b));
 }
 
-void sun_float(in float2 fragCoord, in float iTime, out float4 fragColor) {
+void sun_float(in float2 fragCoord, in float iTime, float splitPoint, float blendRange, float3 topColor1, float3 bottomColor1, 
+    float3 topColor2, float3 bottomColor2, out float4 fragColor) {
     // Gradient
     float gradientPitch = 1.; // (gp) Defines dominative color on gradient. 1 - startCol < gp < 1 - endCol 
     float3 gradientStartCol = float3(1., 1., 0.); // Color in top pixels (Yellow)
@@ -360,11 +361,12 @@ void sun_float(in float2 fragCoord, in float iTime, out float4 fragColor) {
     float lineHeight = 0.1; // Basic line thickness    [0., inf.] (> 0.5 looks ugly)
     float thicknessMod = 0.5; // Speed of line will get thin    [0., inf.]
 
-
+    float scale = 100.0;
+    float2 uv = float2(fragCoord.x*scale-scale*0.5+0.5, fragCoord.y*scale*0.5); // UV of pixel (pixels
     // ======== DEFAULT INITS ========
     float2 sSize = float2(1, 1); // Screen size (pixels)
-    float2 pos = fragCoord.xy; // Pixel pos on screen (pixels)
-    float2 rPos = fragCoord.xy / sSize; // Relative pos on screen [0., 1.]
+    float2 pos = uv.xy; // Pixel pos on screen (pixels)
+    float2 rPos = uv.xy / sSize; // Relative pos on screen [0., 1.]
 
     float4 col = float4(0.,0.,0.,0.); // Color of pixel
     float alpha = 1.; // Alpha of pixel [0., 1.]
@@ -382,8 +384,21 @@ void sun_float(in float2 fragCoord, in float iTime, out float4 fragColor) {
     float2 deltaPos = screenCenter - pos; // Vector from center to pixel (pixels)
     float distToCenter = length(deltaPos); // Distance from center (pixels)
 
+    float blendFactor = max(0.0, (rPos.y - splitPoint + blendRange) *0.5 / blendRange);
+
     if (distToCenter > circleR && isCircled) {
-        col = float4(0.,0.,0.,0.);
+        float3 colorAbove = lerp(bottomColor1, topColor1, rPos.y);
+        float3 colorBelow = lerp(bottomColor2, topColor2, rPos.y);
+
+        if (rPos.y < splitPoint - blendRange) {
+            col = float4(colorBelow, 1.0);
+        } else if (rPos.y > splitPoint + blendRange) {
+            col = float4(colorAbove, 1.0);
+        } else {
+            float3 blendedColor = lerp(colorBelow, colorAbove, blendFactor);
+            col = float4(blendedColor, 1.0);
+        }
+        
     }
 
 
