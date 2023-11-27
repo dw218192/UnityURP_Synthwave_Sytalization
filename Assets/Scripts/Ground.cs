@@ -104,7 +104,7 @@ public class Ground : MonoBehaviour
         var mat = rend.sharedMaterial;
         speed = mat.GetFloat("_speed");
         
-        meshCollider = GetComponent<MeshCollider>();
+        // meshCollider = GetComponent<MeshCollider>();
     }
 
     void Update()
@@ -114,7 +114,7 @@ public class Ground : MonoBehaviour
 
     void LateUpdate()
     {
-        meshCollider.sharedMesh = null;
-        meshCollider.sharedMesh = mesh;
+        // meshCollider.sharedMesh = null;
+        // meshCollider.sharedMesh = mesh;
     }
 }
