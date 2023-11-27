@@ -76,9 +76,9 @@ public class Ground : MonoBehaviour
             float farness = 1.0f - (pos.z + extents.z) / (2 * extents.z); // [0,1]
             pos.y += maxHeight * Mathf.SmoothStep(0.0f, 1.0f, t) + Noise(sp * noiseFreq, 2.2f * (farness * farness));
         }
-        else {
-            pos.y += Noise(sp * noiseFreq * 0.25f) * 0.1f;
-        }
+        // else {
+        //     pos.y += Noise(sp * noiseFreq * 0.25f) * 0.1f;
+        // }
 
         return pos;
     }
