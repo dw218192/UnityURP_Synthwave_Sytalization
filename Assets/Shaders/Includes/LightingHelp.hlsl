@@ -343,14 +343,7 @@ float mod2(float a, float b) {
     return a - (b * floor(a / b));
 }
 
-void sun_float(in float2 fragCoord, in float iTime, out float4 fragColor)
-{
-    // Personally, I'm recommending you to leave LINES parameters on default values
-    //
-    // ======== CONFIG ========
-    // Basics
-    float3 bgCol = float3(0., 0., 0.); // Background color
-
+void sun_float(in float2 fragCoord, in float iTime, out float4 fragColor) {
     // Gradient
     float gradientPitch = 1.; // (gp) Defines dominative color on gradient. 1 - startCol < gp < 1 - endCol 
     float3 gradientStartCol = float3(1., 1., 0.); // Color in top pixels (Yellow)
@@ -373,14 +366,14 @@ void sun_float(in float2 fragCoord, in float iTime, out float4 fragColor)
     float2 pos = fragCoord.xy; // Pixel pos on screen (pixels)
     float2 rPos = fragCoord.xy / sSize; // Relative pos on screen [0., 1.]
 
-    float3 col = float3(0., 0., 0.); // Color of pixel
+    float4 col = float4(0.,0.,0.,0.); // Color of pixel
     float alpha = 1.; // Alpha of pixel [0., 1.]
 
     float time = iTime;
 
 
     // ======== SUN GRADIENT ========
-    col = gradientEndCol + (gradientStartCol - gradientEndCol) * rPos.y * gradientPitch; // Blend dColor to endCol with height. Using endCol 'cause y starts from bottom
+    col = float4(gradientEndCol + (gradientStartCol - gradientEndCol) * rPos.y * gradientPitch, 1.);
 
 
     // ======== CIRCLE SHAPE ========
@@ -390,7 +383,7 @@ void sun_float(in float2 fragCoord, in float iTime, out float4 fragColor)
     float distToCenter = length(deltaPos); // Distance from center (pixels)
 
     if (distToCenter > circleR && isCircled) {
-        col = bgCol;
+        col = float4(0.,0.,0.,0.);
     }
 
 
@@ -403,11 +396,11 @@ void sun_float(in float2 fragCoord, in float iTime, out float4 fragColor)
 
 
         if (bottomBorder < rPos.y && rPos.y < topBorder) { // If y is between bottom and top borders, we paint this to bg color.
-            col = bgCol;
+            col = float4(0.,0.,0.,0.);
         }
     }
 
 
     // ======== OUTPUT ========
-    fragColor = float4(col, alpha); // Output color
+    fragColor = col; // Output color
 }
