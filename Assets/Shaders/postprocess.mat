@@ -145,10 +145,10 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Highlights: {r: -43.3, g: 72, b: -71.67, a: 0}
-    - _Midtones: {r: -56.5, g: 65.4, b: 1, a: 0}
+    - _Highlights: {r: -28.7, g: 19, b: 83.6, a: 0}
+    - _Midtones: {r: 14.3, g: 65.26, b: 1, a: 0}
     - _Modulate_Color: {r: 1, g: 1, b: 1, a: 0}
-    - _Shadows: {r: 424.8, g: 0, b: 23.3, a: 0}
+    - _Shadows: {r: 83.1, g: 0, b: -25.7, a: 0}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
     - _UV_Scale: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
