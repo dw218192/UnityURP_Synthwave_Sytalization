@@ -336,3 +336,78 @@ void Postprocess_float(float3 worldPos, float3 normal, float3 viewVec, float3 al
     // OUT = AdjustColorBalance(pbrCol, convertAdjustColorLevel(Shadows), convertAdjustColorLevel(Midtones), convertAdjustColorLevel(Highlights));
     OUT = AdjustColorBalance(saturate(col), convertAdjustColorLevel(Shadows), convertAdjustColorLevel(Midtones), convertAdjustColorLevel(Highlights));
 }
+
+
+// Modulo function. Like "%" in other languages
+float mod2(float a, float b) {
+    return a - (b * floor(a / b));
+}
+
+void sun_float(in float2 fragCoord, in float iTime, out float4 fragColor)
+{
+    // Personally, I'm recommending you to leave LINES parameters on default values
+    //
+    // ======== CONFIG ========
+    // Basics
+    float3 bgCol = float3(0., 0., 0.); // Background color
+
+    // Gradient
+    float gradientPitch = 1.; // (gp) Defines dominative color on gradient. 1 - startCol < gp < 1 - endCol 
+    float3 gradientStartCol = float3(1., 1., 0.); // Color in top pixels (Yellow)
+    float3 gradientEndCol = float3(1., 0., 1.); // Color in bottom pixels (Purple)
+
+    // Circle
+    bool isCircled = true;
+    float circleRR = 0.5; // Circle relative radius    [0., 1.]    This number multiplies min of your resolution
+
+    // Animated lines    
+    int linesCount = 8; // Count of lines    [0, inf]
+    float lineLenght = 0.5; // Relative distance from bottom of screen to death pos    [0., 1.]
+    float linesSpeed = 0.125; // Speed of lines
+    float lineHeight = 0.1; // Basic line thickness    [0., inf.] (> 0.5 looks ugly)
+    float thicknessMod = 0.5; // Speed of line will get thin    [0., inf.]
+
+
+    // ======== DEFAULT INITS ========
+    float2 sSize = float2(1, 1); // Screen size (pixels)
+    float2 pos = fragCoord.xy; // Pixel pos on screen (pixels)
+    float2 rPos = fragCoord.xy / sSize; // Relative pos on screen [0., 1.]
+
+    float3 col = float3(0., 0., 0.); // Color of pixel
+    float alpha = 1.; // Alpha of pixel [0., 1.]
+
+    float time = iTime;
+
+
+    // ======== SUN GRADIENT ========
+    col = gradientEndCol + (gradientStartCol - gradientEndCol) * rPos.y * gradientPitch; // Blend dColor to endCol with height. Using endCol 'cause y starts from bottom
+
+
+    // ======== CIRCLE SHAPE ========
+    float circleR = min(sSize.x, sSize.y) * circleRR; // Radius of circle (pixels)
+    float2 screenCenter = sSize / 2.; // Center of screen (pixels)
+    float2 deltaPos = screenCenter - pos; // Vector from center to pixel (pixels)
+    float distToCenter = length(deltaPos); // Distance from center (pixels)
+
+    if (distToCenter > circleR && isCircled) {
+        col = bgCol;
+    }
+
+
+    // ======== ANIMATED LINES ========
+    for (float iter = 0.; iter < float(linesCount); iter++) {
+        float lineOsc = mod2(time * linesSpeed + iter / float(linesCount), 1.); // Making simple oscillator y = mod(x, 1)    Adding additional speed and iterations offset
+
+        float topBorder = lineOsc; // Setting top border for this line
+        float bottomBorder = topBorder - lineHeight * pow(lineLenght - lineOsc, thicknessMod); // Setting bottom border and making it moving FASTER than top, so the line will be thinner at top
+
+
+        if (bottomBorder < rPos.y && rPos.y < topBorder) { // If y is between bottom and top borders, we paint this to bg color.
+            col = bgCol;
+        }
+    }
+
+
+    // ======== OUTPUT ========
+    fragColor = float4(col, alpha); // Output color
+}
