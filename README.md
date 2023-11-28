@@ -82,3 +82,20 @@ The project's primary objective is to build an interactive, procedural generatio
   - Sun shader in progress
 ### Current Result
 - <img width="1280" alt="5ae1f9451e39f5789adea058fa98cb3" src="https://github.com/dw218192/UnityURP_Synthwave_Sytalization/assets/31294154/fa5083c5-099b-481a-9d71-e6421a1b552b">
+
+
+
+## Milestone #2
+### Works Done:
+
+- **Tongwei Dai**
+  - Create a procedural terrain that can mimic infinite road
+  - Add physics to the car so that it can move up and down while moving forward
+
+- **Gehan Zheng**
+  - Add volumetric fog to increase the visual quality of the scene
+  - Build the sample scene by adding moving trees and screen space reflection road
+
+- **Shixuan Fang**
+  - Finished the procedural sun with controllable parameters
+  - Add a color gradient sky to mimic the desirable visual result
