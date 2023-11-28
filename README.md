@@ -93,9 +93,13 @@ The project's primary objective is to build an interactive, procedural generatio
   - Add physics to the car so that it can move up and down while moving forward
 
 - **Gehan Zheng**
-  - Add volumetric fog to increase the visual quality of the scene
-  - Build the sample scene by adding moving trees and screen space reflection road
+  - Add volumetric fog to the car and the scene to increase the visual quality of the scene
+  - Build the sample scene by adding moving palm trees and moving screen space reflection road
 
 - **Shixuan Fang**
   - Finished the procedural sun with controllable parameters
   - Add a color gradient sky to mimic the desirable visual result
+### Result
+
+https://github.com/dw218192/UnityURP_Synthwave_Sytalization/assets/31180310/0a5d22d2-77f0-4c90-aa5c-6bcb6888e20f
+
