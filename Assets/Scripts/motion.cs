@@ -7,21 +7,15 @@ public class Motion : MonoBehaviour
 {
     public float beginZ; 
     public float endZ;   
-    public float speed = 1.0f; 
 
-    private float startTime; 
     private Vector3 origin;
     void Start()
     {
-        startTime = Time.time; 
         origin = transform.position;
     }
 
-    void Update()
-    {
-        float distance = (Time.time - startTime) * speed;
-        
-        float newZ = transform.position.z - distance;
+    void Update() {
+        float newZ = transform.position.z - Time.deltaTime * DemoManager.Instance.Speed;
 
         if (newZ >= endZ)
         {
@@ -29,7 +23,6 @@ public class Motion : MonoBehaviour
         }
         else
         {   
-            startTime = Time.time;
             transform.position = new Vector3(origin.x, transform.position.y, beginZ);
         }
         if (transform.position.y < 0){

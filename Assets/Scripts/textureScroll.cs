@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class textureScroll : MonoBehaviour
 {
-    public float scrollSpeed = 0.5f;
     private Renderer rend;
     private Material mat;
 
@@ -28,7 +27,7 @@ public class textureScroll : MonoBehaviour
     {
         if (mat != null)
         {
-            float offset = -Time.time * scrollSpeed;
+            float offset = -Time.time * DemoManager.Instance.Speed;
             mat.SetTextureOffset("_BaseMap", new Vector2(0, offset));
         }
     }

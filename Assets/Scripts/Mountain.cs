@@ -8,8 +8,10 @@ public class Mountain : VertexChanger
     public float noiseFreq = 6.0f;
     public float xthres = 1.87f;
 
-    Vector3 extents; 
+    Material mat;
     float speed;
+
+    Vector3 extents; 
 
     protected override Vector3 ModifyVerts(Vector3 pos) {
        Vector2 sp = new Vector2(pos.x, pos.z - speed * Time.time);
@@ -26,7 +28,16 @@ public class Mountain : VertexChanger
         base.Start();
         var rend = GetComponent<Renderer>();
         extents = rend.localBounds.extents;
-        var mat = rend.sharedMaterial;
-        speed = mat.GetFloat("_speed");
+        mat = rend.sharedMaterial;
+        
+        ChangeSpeed(DemoManager.Instance.Speed);
+        DemoManager.Instance.OnSpeedChanged += ChangeSpeed;
+    }
+
+    void ChangeSpeed(float newSpeed)
+    {
+        newSpeed *= 2f;
+        speed = newSpeed;
+        mat.SetFloat("_speed", newSpeed);
     }
 }

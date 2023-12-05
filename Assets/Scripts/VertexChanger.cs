@@ -35,7 +35,7 @@ public abstract class VertexChanger : MonoBehaviour
         UpdateMesh();
     }
 
-    void LateUpdate()
+    void FixedUpdate()
     {
         if (meshCollider != null && meshCollider.sharedMesh != null)
         {
