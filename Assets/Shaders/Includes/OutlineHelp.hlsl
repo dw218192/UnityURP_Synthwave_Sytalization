@@ -85,6 +85,20 @@ float3 AdjustColorBalance(float3 color, float3 shadowsAdjustments, float3 midton
     return saturate(color);
 }
 
+void DamagedEffect_float(Texture2D MainTex, float2 uv, float iTime, float amp, out float3 OUT)
+{
+    // Normalized pixel coordinates (from 0 to 1)
+    float2 offset1 = float2(0.,sin(iTime)*amp);
+    float2 offset2 = float2(amp,0.);
+    float2 offset3 = float2(0,-sin(iTime)*amp);
+    
+    float r = SAMPLE_TEXTURE2D(MainTex,sampler_point_clamp, uv + offset1).r;
+    float g = SAMPLE_TEXTURE2D(MainTex,sampler_point_clamp, uv + offset2).g;
+    float b = SAMPLE_TEXTURE2D(MainTex,sampler_point_clamp, uv + offset3).b;
+    
+    OUT = float3(r, g, b);
+}
+
 void Postprocess_float(Texture2D MainTex, float2 UV, float2 UVScale,
     float Thickness, float Threshold, float Strength, float Seed, float3 OutlineColor, 
     float3 Shadows, float3 Midtones, float3 Highlights,
