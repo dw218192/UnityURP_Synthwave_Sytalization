@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 552c866e32d5f734daec12e70f016d2c, type: 3}
-  m_Name: NormalFeature
+  m_Name: ButoVolumetricLightingAndFog
   m_EditorClassIdentifier: 
   m_Active: 1
   normalsLayerMask:
@@ -38,7 +38,8 @@ MonoBehaviour:
   - {fileID: -4194034276298756404}
   - {fileID: 866161634648041191}
   - {fileID: 5857422987208069716}
-  m_RendererFeatureMap: cc6e66f10bcccbc5e7a644e76a39050c5492be432cbf4951
+  - {fileID: 6228052977029150099}
+  m_RendererFeatureMap: cc6e66f10bcccbc5e7a644e76a39050c5492be432cbf495193f5225a2f7d6e56
   m_UseNativeRenderPass: 0
   postProcessData: {fileID: 0}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
@@ -89,7 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8faec35144280c146ac2395f7d7187de, type: 3}
   m_Name: FullScreenFeature
   m_EditorClassIdentifier: 
-  m_Active: 1
+  m_Active: 0
   settings:
     renderPassEvent: 450
     outlineMaterial: {fileID: 2100000, guid: 21399e70837aad944996ff58c4fe33f6, type: 2}
@@ -107,7 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8faec35144280c146ac2395f7d7187de, type: 3}
   m_Name: FullScreenFeature
   m_EditorClassIdentifier: 
-  m_Active: 1
+  m_Active: 0
   settings:
     renderPassEvent: 500
     outlineMaterial: {fileID: 2100000, guid: 2be1fd23c163d014e92e87b6caa27c6f, type: 2}
@@ -124,5 +125,18 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 68b624435dfe08149a1f2b91daccda61, type: 3}
   m_Name: Dummy
+  m_EditorClassIdentifier: 
+  m_Active: 1
+--- !u!114 &6228052977029150099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96dab975e69883249a56554e791c4fd0, type: 3}
+  m_Name: ButoVolumetricLightingAndFog
   m_EditorClassIdentifier: 
   m_Active: 1
