@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using VLB;
+using static UnityEditor.PlayerSettings;
 
 public class Car : MonoBehaviour
 {
@@ -11,7 +12,10 @@ public class Car : MonoBehaviour
     public ParticleSystem[] carSmokes;
     public VolumetricLightBeamSD[] beamSDs;
     public float beamSpeed = 2.3f;
+    public float speedSpeed = 5.0f;
     public float loBeam = 7, hiBeam = 16;
+    public float loSpeed = 8, hiSpeed = 50;
+    public float loX = -0.5f, hiX = 0.5f;
 
     void Awake()
     {
@@ -28,6 +32,7 @@ public class Car : MonoBehaviour
             {
                 smoke.Play(true);
             }
+            DemoManager.Instance.Speed = hiSpeed;
         }
 
         if (Input.GetKeyUp(KeyCode.Space))
@@ -36,32 +41,46 @@ public class Car : MonoBehaviour
             {
                 smoke.Stop(true);
             }
+            DemoManager.Instance.Speed = loSpeed;
         }
-
-        Debug.Log(beamSDs[0].spotAngle);
 
         if (Input.GetKey(KeyCode.Space))
         {
-            if (!Mathf.Approximately(beamSDs[0].spotAngle, 16))
+            if (!Mathf.Approximately(beamSDs[0].spotAngle, hiBeam))
             {
                 foreach (var beamSD in beamSDs)
                 {
-                    beamSD.spotAngle = Mathf.Min(16, beamSD.spotAngle + beamSpeed * Time.deltaTime);
+                    beamSD.spotAngle = Mathf.Min(hiBeam, beamSD.spotAngle + beamSpeed * Time.deltaTime);
                     beamSD.UpdateAfterManualPropertyChange();
                 }
+//                DemoManager.Instance.Speed = Mathf.Min(hiSpeed, DemoManager.Instance.Speed + speedSpeed * Time.deltaTime);
             }
         }
         else
         {
-            if (!Mathf.Approximately(beamSDs[0].spotAngle, 7))
+            if (!Mathf.Approximately(beamSDs[0].spotAngle, loBeam))
             {
                 foreach (var beamSD in beamSDs)
                 {
-                    beamSD.spotAngle = Mathf.Max(7, beamSD.spotAngle - beamSpeed * Time.deltaTime);
+                    beamSD.spotAngle = Mathf.Max(loBeam, beamSD.spotAngle - beamSpeed * Time.deltaTime);
                     beamSD.UpdateAfterManualPropertyChange();
                 }
+//               DemoManager.Instance.Speed = Mathf.Max(loSpeed, DemoManager.Instance.Speed - speedSpeed * Time.deltaTime);
             }
         }
+
+
+        var pos = transform.position;
+        if (Input.GetKey(KeyCode.A))
+        {
+            pos.x = Mathf.Max(loX, pos.x - speedSpeed * Time.deltaTime);
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            pos.x = Mathf.Min(hiX, pos.x + speedSpeed * Time.deltaTime);
+        }
+
+        transform.position = pos;
     }
 
     void LateUpdate()
@@ -72,7 +91,7 @@ public class Car : MonoBehaviour
 
         // lock x and z position
         var pos = transform.position;
-        pos.x = initialPos.x;
+        pos.x = Mathf.Clamp(pos.x, loX, hiX);
         pos.z = initialPos.z;
         transform.position = pos;
     }
