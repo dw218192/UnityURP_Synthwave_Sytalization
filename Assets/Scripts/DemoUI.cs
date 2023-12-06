@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class DemoUI : MonoBehaviour
 {
     public Slider speedSlider;
+    public ParticleSystem[] carSmokes;
 
     private void Start()
     {
@@ -24,5 +25,23 @@ public class DemoUI : MonoBehaviour
         slider.value = value;
         slider.transform.parent.GetComponentInChildren<Text>().text = label;
         slider.onValueChanged.AddListener(callback);
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            foreach (var smoke in carSmokes)
+            {
+                if (smoke.isPlaying)
+                {
+                    smoke.Stop();
+                }
+                else
+                {
+                    smoke.Play();
+                }
+            }
+        }
     }
 }
