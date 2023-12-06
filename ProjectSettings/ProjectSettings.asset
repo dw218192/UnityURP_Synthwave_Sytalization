@@ -733,7 +733,7 @@ PlayerSettings:
   webGLMemoryGeometricGrowthCap: 96
   webGLPowerPreference: 2
   scriptingDefineSymbols:
-    Standalone: AURA_IN_SCENEVIEW;AURA_IN_PROJECT
+    Standalone: AURA_IN_SCENEVIEW;AURA_IN_PROJECT;VLB_URP
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}

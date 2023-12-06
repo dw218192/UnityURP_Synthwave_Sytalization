@@ -31,8 +31,8 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 1
   sampleCount:
-    m_OverrideState: 0
-    m_Value: 64
+    m_OverrideState: 1
+    m_Value: 128
   animateSamplePosition:
     m_OverrideState: 0
     m_Value: 0
@@ -61,20 +61,20 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 0.03
   fogMaskBlendMode:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0
   fogDensity:
     m_OverrideState: 1
-    m_Value: 3
+    m_Value: 4.82
   anisotropy:
     m_OverrideState: 0
     m_Value: 0.2
   lightIntensity:
-    m_OverrideState: 0
-    m_Value: 1
+    m_OverrideState: 1
+    m_Value: 1.61
   shadowIntensity:
     m_OverrideState: 0
-    m_Value: 1
+    m_Value: 1.01
   baseHeight:
     m_OverrideState: 0
     m_Value: 0
@@ -91,14 +91,14 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: {fileID: 11700000, guid: 7a39177910b772b40abf6e297affae05, type: 2}
   octaves:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 2
   lacunarity:
-    m_OverrideState: 0
-    m_Value: 2
+    m_OverrideState: 1
+    m_Value: 1.89
   gain:
-    m_OverrideState: 0
-    m_Value: 0.3
+    m_OverrideState: 1
+    m_Value: 0.223
   noiseTiling:
     m_OverrideState: 0
     m_Value: 50

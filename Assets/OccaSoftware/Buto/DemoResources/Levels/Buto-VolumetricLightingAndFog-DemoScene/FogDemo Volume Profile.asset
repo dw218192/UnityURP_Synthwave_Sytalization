@@ -31,14 +31,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 1
   color:
-    m_OverrideState: 0
-    m_Value: {r: 0, g: 0, b: 0, a: 1}
+    m_OverrideState: 1
+    m_Value: {r: 1, g: 1, b: 1, a: 1}
   center:
     m_OverrideState: 0
     m_Value: {x: 0.5, y: 0.5}
   intensity:
     m_OverrideState: 1
-    m_Value: 0.45
+    m_Value: 0.415
   smoothness:
     m_OverrideState: 1
     m_Value: 1
@@ -77,8 +77,8 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 1
   maxDistanceVolumetric:
-    m_OverrideState: 0
-    m_Value: 64
+    m_OverrideState: 1
+    m_Value: 49
   analyticFogEnabled:
     m_OverrideState: 0
     m_Value: 0
@@ -96,13 +96,13 @@ MonoBehaviour:
     m_Value: 0
   fogDensity:
     m_OverrideState: 1
-    m_Value: 27.97
+    m_Value: 0
   anisotropy:
     m_OverrideState: 0
     m_Value: 0.2
   lightIntensity:
-    m_OverrideState: 0
-    m_Value: 1
+    m_OverrideState: 1
+    m_Value: 2.36
   shadowIntensity:
     m_OverrideState: 0
     m_Value: 1
@@ -113,7 +113,7 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 10
   colorRamp:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: {fileID: 0}
   colorRampInfluence:
     m_OverrideState: 0

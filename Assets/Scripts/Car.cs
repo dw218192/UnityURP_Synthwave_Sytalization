@@ -28,5 +28,6 @@ public class Car : MonoBehaviour
         var pos = transform.position;
         pos.x = initialPos.x;
         pos.z = initialPos.z;
+        transform.position = pos;
     }
 }
