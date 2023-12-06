@@ -103,3 +103,10 @@ The project's primary objective is to build an interactive, procedural generatio
 
 https://github.com/dw218192/UnityURP_Synthwave_Sytalization/assets/31180310/0a5d22d2-77f0-4c90-aa5c-6bcb6888e20f
 
+## Final
+
+[Video link](https://youtu.be/eqoowZOZg6A)
+
+### Post mortem
+
+Since we have clear goals and a clear division of labor, the project went well overall. Except for few features that were not compatible with other features and were discarded and were replaced by some other features, the rest of the project was completed as planned. We did not have to pivot.
