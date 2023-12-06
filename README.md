@@ -1,5 +1,7 @@
 # Retro Wave Landscape Generator Design Document (Unity URP Version)
 
+![image](https://github.com/dw218192/UnityURP_Synthwave_Sytalization/assets/31180310/03614220-def5-4788-bd5a-b7b1cb10d321)
+
 ## 1. Introduction
 The Retro Wave Landscape Generator for Unity URP (Universal Render Pipeline) will encapsulate the quintessential aesthetics of the 1980s retro-futuristic visuals, celebrated in synthwave/retrowave art. By leveraging Unity's URP, the tool will allow users to generate stylized landscapes imbued with vibrant neon colors, glowing horizons, and abstract mountain silhouettes. It will tap into the powerful rendering capabilities of URP to achieve high-performance visuals suitable for both game development and standalone digital art.
 
@@ -99,7 +101,7 @@ The project's primary objective is to build an interactive, procedural generatio
 - **Shixuan Fang**
   - Finished the procedural sun with controllable parameters
   - Add a color gradient sky to mimic the desirable visual result
-### Result
+### Current Result
 
 https://github.com/dw218192/UnityURP_Synthwave_Sytalization/assets/31180310/0a5d22d2-77f0-4c90-aa5c-6bcb6888e20f
 
